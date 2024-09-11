@@ -19,7 +19,7 @@ git clone https://github.com/1mov/todo.git
 
 ### 2. Создайте и активируйте виртуальное окружение
 python -m venv venv 
-source venv/bin/activate  # для Windows: venv\Scripts\activate
+| source venv/bin/activate | для Windows: venv\Scripts\activate
 
 ### 3. Установите зависимости
 pip install -r requirements.txt
