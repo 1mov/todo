@@ -18,7 +18,7 @@
 git clone https://github.com/1mov/todo.git
 
 ### 2. Создайте и активируйте виртуальное окружение
-python -m venv venv
+python -m venv venv 
 source venv/bin/activate  # для Windows: venv\Scripts\activate
 
 ### 3. Установите зависимости
@@ -36,9 +36,19 @@ python manage.py migrate
 python manage.py createsuperuser
 
 (Есть пользователь, с ним можно зайти и на сам сайт, у него уже созданно несколько задач)
-login: admin
+login: admin 
 password: admin
 
 ### 6. Запуск сервера разработки
 python manage.py runserver
 
+Теперь перейдите по адресу http://127.0.0.1:8000/ в вашем браузере, чтобы увидеть сайт
+
+### Использование
+Регистрация и вход
+Зарегистрируйте нового пользователя или войдите с существующими данными(login:admin | password:admin).
+После входа вы сможете добавлять и управлять своими задачами.
+
+### Тестирование
+## Приложение покрыто юнит-тестами для основных функций. Чтобы запустить тесты, выполните команду:
+python manage.py test
