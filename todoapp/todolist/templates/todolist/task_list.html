@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Мои задачи</h2>
+    <a href="{% url 'add_task' %}">Добавить задачу</a>
+    <br><br>
+
+    <a href="?status=all">Все задачи</a> |
+    <a href="?status=completed">Завершённые задачи</a> |
+    <a href="?status=not_completed">Незавершённые задачи</a> |
+    <a href="?sort_by=date">Сортировка по дате (Сначала старые)</a> |
+    <a href="?sort_by=date_desc">Сортировка по дате (Сначала новые)</a> |
+    <a href="?sort_by=status">Сортировка по статусу</a>
+    <br><br>
+
+    <div style="height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <strong>Название:</strong> <a href="{% url 'edit_task' task.id %}">{{ task.title }}</a>
+                    <br>
+                    <strong>Описание:</strong> {{ task.description }}
+                    <br>
+                    <strong>Создано:</strong> {{ task.created_at|date:"d M Y H:i" }}
+                    <br>
+                    {% if task.completed %}
+                        <strong>Статус:</strong> Завершено
+                    {% else %}
+                        <strong>Статус:</strong> Незавершено
+                    {% endif %}
+                    <br>
+                    <form action="{% url 'delete_task' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">Удалить</button>
+                    </form>
+                    <form action="{% url 'mark_completed' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">
+                            {% if task.completed %}Отметить как незавершённую{% else %}Отметить как завершённую{% endif %}
+                        </button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
